@@ -11,4 +11,6 @@ Extensive hardware health checks have been run and I've verified system specific
 
 ![Windows RAM Diagnostics](image-2.png)
 
+Everything in this repo will also be committed directly through main and not through a separate branch before being merged 🙀🙀🙀 Big software dev nono
+
 While I wait for other components to arrive, I'll start by documenting my initial homelab plans. I'm going to document this homelab journey using a format that closely resembles the Software Development Life Cycle because it pretty much entails everything that should be documented in a system design process and it's the most structured process that I'm familiar with.
