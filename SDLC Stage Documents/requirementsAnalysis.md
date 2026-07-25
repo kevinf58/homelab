@@ -1,8 +1,6 @@
 # 2.0 - Requirements Analysis
 
-This section entails all functional and non-functional requirements for the system
-
-This section outlines the functional and non-functional requirements I will implement for this project.
+_This section entails all functional and non-functional requirements for the system_
 
 ## 2.1 - Functional Requirements
 
