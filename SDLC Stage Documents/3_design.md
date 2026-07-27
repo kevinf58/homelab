@@ -9,7 +9,9 @@ _The purpose of this section is to satisfy and elaborate on the requirements men
 <ins>Context diagram</ins>
 
 ![context diagram](context.png)
+
 <ins>Container diagram</ins>
+
 <ins>Component diagram</ins>
 
 ## 3.2 - Hardware Design
