@@ -4,10 +4,13 @@ _The purpose of this section is to satisfy and elaborate on the requirements men
 
 ## 3.1 - General Architecture
 
-C4 Diagram
-Context diagram
-Container diagram
-Component diagram
+### 3.1.1 - C4 Diagram
+
+<ins>Context diagram</ins>
+
+![context diagram](context.png)
+<ins>Container diagram</ins>
+<ins>Component diagram</ins>
 Hardware Design
 
 - Lenovo ThinkCentre m920q: Hypervisor host
