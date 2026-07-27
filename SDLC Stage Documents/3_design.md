@@ -11,7 +11,8 @@ _The purpose of this section is to satisfy and elaborate on the requirements men
 ![context diagram](context.png)
 <ins>Container diagram</ins>
 <ins>Component diagram</ins>
-Hardware Design
+
+## 3.2 - Hardware Design
 
 - Lenovo ThinkCentre m920q: Hypervisor host
 - 512GB SSD: Proxmox installation and VM boot disks
@@ -26,7 +27,7 @@ Hardware Design
 
 Physical infrastructure diagram
 
-## 3.2 - Storage Design
+## 3.3 - Storage Design
 
 NVMe SSD (in the ThinkCentre)
 
@@ -44,17 +45,17 @@ External DAS
 
 Storage architecture diagram
 
-## 3.3 - Network Design
+## 3.4 - Network Design
 
 Network topology diagram
 
-## 3.4 - VM Designs
+## 3.5 - VM Designs
 
-## 3.5 - Security Design
+## 3.6 - Security Design
 
-## 3.6 - Backup and Recovery Design
+## 3.7 - Backup and Recovery Design
 
-## 3.7 - Analytics and Monitoring Design
+## 3.8 - Analytics and Monitoring Design
 
 Hardware metrics should be constantly monitored for abnormalities and disaster prevention. Some of these metrics may be monitored in the form of a graph to improve readability.
 Some of these metrics may include:
@@ -70,7 +71,7 @@ Some of these metrics may include:
 
 If any abnormalities are found, notifications will be sent through email and/or app
 
-## 3.8 - Scalability
+## 3.9 - Scalability
 
 This system is designed to be scalable if more compute resources or functionalities are needed
 
