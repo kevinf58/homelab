@@ -26,7 +26,7 @@ Hardware components
 - Mini display monitor
 - 8gb+ bootable USB (to install Proxmox)
 
-For now, the initial budget for the homelab sits at around $1,000 but it will most likely increase as it scales in the future.
+For now, the initial budget for the homelab sits at around $2,000 but it will most likely increase as it scales in the future.
 
 ## 1.4 - Constraints and Feasibility
 
