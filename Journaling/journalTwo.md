@@ -6,7 +6,9 @@ NAS's are recommended for RAID configs and remote file access, which are 2 thing
 
 <ins>Key problem with this setup</ins>
 
-No hardware RAID will exist on my DAS if I am looking to use Raid-Z1 software RAID. Using the JBOD config in my DAS means that I would be bridging the connection between my 4 drives and ThinkCentre using one USB-C cable. That cable dropping for even a second could result in corruption or loss of data. The best solution for this would be to get a JBOD enclosure that offers one eSATA connection per SATA HDD so that I could attach them all to a SATA HBA PCIe card attached to my ThinkCentre. This would be a pain in the ass and my HBA card will most likely be living out of the ThinkCentre enclosure.
+No hardware RAID will exist on my DAS if I am looking to use Raid-Z1 software RAID. Using the JBOD config in my DAS means that I would be bridging the connection between my 4 drives and ThinkCentre using one USB-C cable. That cable dropping for even a second could result in corruption or loss of data.
+
+The best solution for this would be to get a JBOD enclosure that offers one eSATA connection per SATA HDD so that I could attach them all to a SATA HBA PCIe card attached to my ThinkCentre. My HBA card would most likely be living out of the ThinkCentre enclosure which is not ideal. I'd also have to get a 2.5GbE adapter for one of the USB ports as my singular PCIE slot is occupied by the HBA card and purchase my own cables, fans and PSU. I'd also need something to connect my HDD PSU with my ThinkCentre PSU so that the HDDs power on with the ThinkCentre. HOWEVER, this setup would allow me to use SAS HDD's and save alot of money on storage. I'm also already considering getting a UPS, so I could use that to power my drives. The more I think about this solution, the more attractive it sounds and it may actually be the one I go with as this single point of failure really shouldn't exist.
 
 <ins>What to look for in my NAS</ins>
 
