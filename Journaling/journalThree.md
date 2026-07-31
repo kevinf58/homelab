@@ -1,6 +1,6 @@
 # A Big Update to My Homelab Design!
 
-Sooo I did a bit of brainstorming and found this video by Hardware Haven: [JBOD Tutorial](http://youtube.com/watch?v=QGkqwdM0L6g) where he documents his process on building his own JBOD (Just a bunch of disks) enclosure with SATA drives. This pretty much directly solves the issue with my 4 drives being connected via a single USB connection if I were to buy a prebuilt DAS. The only issue I had with this setup was that the SAS HBA card would most likely live outside of my ThinkCentre enclosure as there wasn't enough space.
+Sooo I did a bit of brainstorming and found [this](http://youtube.com/watch?v=QGkqwdM0L6g) video by Hardware Haven where he documents his process on building his own JBOD (Just a bunch of disks) enclosure with SATA drives. This pretty much directly solves the issue with my 4 drives being connected via a single USB connection if I were to buy a prebuilt DAS. The only issue I had with this setup was that the SAS HBA card would most likely live outside of my ThinkCentre enclosure as there wasn't enough space.
 
 A JBOD setup like that would be a bit more expensive than if I were to just buy a 4-bay DAS enclosure like the TERRAMASTER D4-320 I have right now, but like I mentioned before, no single point of failure with the USB connection. The simplest option to fix this would be to just cave in and buy a NAS but paying $600 minimum for a reliable one before pricing in the SATA HDD's is really unattractive.
 
