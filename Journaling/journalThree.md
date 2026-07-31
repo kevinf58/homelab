@@ -7,7 +7,7 @@ A JBOD setup like that would be a bit more expensive than if I were to just buy 
 I've done some more thinking and I think I'm going to use a similar JBOD approach the video outlined but with SAS drives! I'll return the TERRAMASTER I purchased from Amazon.
 
 ![TERRAMASTER D4-320](image-3.png)
-_TERRAMASTER D4-320 (4-bay DAS)_
+<small>_TERRAMASTER D4-320 (4-bay DAS)_</small>
 
 ## A Rough Proposal
 
