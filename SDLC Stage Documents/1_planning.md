@@ -31,7 +31,9 @@ This project will not attempt to reproduce enterprise functionality at a large c
 
 ## 1.3 - Timeline
 
-This project is not constrained by deadlines, but it would be ideal for the portfolio website hostying and home cloud storage functionality be fleshed out in the next 2 months.
+The project is not constrained by deadlines because it is intended to be developed incrementally as a long-term homelab project.
+
+The initial priority is to establish the infrastructure required for the personal website and cloud storage functionality within the next 2 months.
 
 ## 1.4 - Resources
 
