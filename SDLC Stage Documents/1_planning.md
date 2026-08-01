@@ -49,8 +49,9 @@ The initial priority is to establish the infrastructure required for the persona
 - Mini display monitor
 - 8gb+ bootable USB (to install Proxmox)
 
-[!IMPORTANT]
-An update to Hardware Resources
+> [!IMPORTANT]
+>
+> #### An update to Hardware Resources
 
 My original plan identified an external DAS and SATA HDD's as the storage solution. During the design phase, I identified a single point of failure in my design and chose an alternative solution to go with.
 
