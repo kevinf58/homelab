@@ -19,37 +19,19 @@ _The purpose of this section is to satisfy and elaborate on the requirements men
 - Lenovo ThinkCentre m920q: Hypervisor host
 - 512GB SSD: Proxmox installation and VM boot disks
 - 32GB RAM: Memory required to host services
-- DAS: Storage bay
-- SATA HDDs: Cloud storage
-- UPS: Power protection and reliability
-- 2.5 GbE NIC: Faster LAN throughput
-- Ethernet cable: Proxmox support and provide faster, more stable LAN throughput
 - ThinkCentre PCIe adapter: x16 PCIe slot addon for expansion cards
+- Ethernet cable: Proxmox support and provide faster, more stable LAN throughput
+- UPS: Power protection and reliability
 - Display monitor: Display for metrics and analytics dashboard
-- 8Gb+ USB: Flash Proxmox
-
-> [!IMPORTANT]
->
-> ### An update to Hardware Design
->
-> _These changes to the hardware design have been made since the making of this document_
->
-> - Lenovo ThinkCentre m920q: Hypervisor host
-> - 512GB SSD: Proxmox installation and VM boot disks
-> - 32GB RAM: Memory required to host services
-> - ThinkCentre PCIe adapter: x16 PCIe slot addon for expansion cards
-> - Ethernet cable: Proxmox support and provide faster, more stable LAN throughput
-> - UPS: Power protection and reliability
-> - Display monitor: Display for metrics and analytics dashboard
-> - 8gb+ bootable USB: Flash Proxmox
-> - SAS HBA card flashed into IT mode: Storage controller expansion card for SAS drives
-> - x16 PCIe extension ribbon: Extend the HBA card outside of ThinkCentre enclosure. May not be needed
-> - SFF-8087 to 4x SFF-8482 + 4x SATA power breakout cable: Splitting connections amongst SAS HDDs, PSU, and HBA card
-> - 40mm fan: HBA card cooler
-> - 80mm fan: HDD cooler
-> - AC-to-DC PSU with minimum 5 SATA ports: HDD fan and HDD cooler
-> - PWM controller: HDD fan remote
-> - 4 SAS HDD's: Cloud, RAID, and backup storage
+- 8gb+ bootable USB: Flash Proxmox
+- SAS HBA card flashed into IT mode: Storage controller expansion card for SAS drives
+- x16 PCIe extension ribbon: Extend the HBA card outside of ThinkCentre enclosure. May not be needed
+- SFF-8087 to 4x SFF-8482 + 4x SATA power breakout cable: Splitting connections amongst SAS HDDs, PSU, and HBA card
+- 40mm fan: HBA card cooler
+- 80mm fan: HDD cooler
+- AC-to-DC PSU with minimum 5 SATA ports: HDD fan and HDD cooler
+- PWM controller: HDD fan remote
+- 4 SAS HDD's: Cloud, RAID, and backup storage
 
 Physical infrastructure diagram
 
