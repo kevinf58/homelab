@@ -65,7 +65,7 @@ The initial priority is to establish the infrastructure required for the persona
 > - PWM controller
 > - 4 SAS HDD's
 >
->   Despite this change in resources, the initial objectives for this project remain unchanged.
+> Despite this change in resources, the initial objectives for this project remain unchanged.
 
 ### Financial Resources
 
