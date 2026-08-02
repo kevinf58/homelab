@@ -51,25 +51,19 @@ The initial priority is to establish the infrastructure required for the persona
 
 > [!IMPORTANT]
 >
-> #### An update to Hardware Resources
+> ### An update to Hardware Resources
+>
+> My original plan identified an external DAS and SATA HDD's as the storage solution. During the design phase, I identified a single point of failure in my design and chose an alternative solution to go with.
+> This alternative solution would require the additional hardware listed:
 
-My original plan identified an external DAS and SATA HDD's as the storage solution. During the design phase, I identified a single point of failure in my design and chose an alternative solution to go with.
-
-This alternative solution would require the additional hardware listed:
-
-- SAS HBA card flashed into IT mode
-- x16 PCIe extension ribbon
-- SFF-8087 to 4x SFF-8482 + 4x SATA power breakout cable
-- 40mm fan
-- 80mm fan
-- AC-to-DC PSU with minimum 5 SATA ports
-- PWM controller
-- 4 SAS HDD's
-
-It would also eliminate the hardware requirements listed above:
-
-- ~External DAS (prefereably 4-bay+)~
-- ~SATA HDDs (preferably enterprise grade)~
+> - SAS HBA card flashed into IT mode
+> - x16 PCIe extension ribbon
+> - SFF-8087 to 4x SFF-8482 + 4x SATA power breakout cable
+> - 40mm fan
+> - 80mm fan
+> - AC-to-DC PSU with minimum 5 SATA ports
+> - PWM controller
+> - 4 SAS HDD's
 
 Despite this change in resources, the initial objectives for this project remain unchanged.
 
@@ -120,7 +114,7 @@ Some enterprise-level features are considered unreasonable for the project's cur
 
 This project will therefore focus on a balance between enterprise-like architecture and features and practical homelab requirements.
 
-## 1.10 - Success Criteria
+## 1.8 - Success Criteria
 
 This project will be considered successful when the following holds:
 
