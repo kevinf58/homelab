@@ -40,8 +40,8 @@ The initial priority is to establish the infrastructure required for the persona
 ### Hardware Resources
 
 - Lenovo ThinkCentre m920q
-- ~External DAS (prefereably 4-bay+)~
-- ~SATA HDDs (preferably enterprise grade)~
+- External DAS (prefereably 4-bay+)
+- SATA HDDs (preferably enterprise grade)
 - ThinkCentre PCIe adapter
 - 2.5 GbE+ NIC
 - Ethernet cable
@@ -54,8 +54,14 @@ The initial priority is to establish the infrastructure required for the persona
 > ### An update to Hardware Resources
 >
 > My original plan identified an external DAS and SATA HDD's as the storage solution. During the design phase, I identified a single point of failure in my design and chose an alternative solution to go with.
-> This alternative solution would require the additional hardware listed:
+> This alternative solution would require the following updated list of hardware:
 >
+> - Lenovo ThinkCentre m920q
+> - ThinkCentre PCIe adapter
+> - Ethernet cable
+> - UPS
+> - Mini display monitor
+> - 8gb+ bootable USB (to install Proxmox)
 > - SAS HBA card flashed into IT mode
 > - x16 PCIe extension ribbon
 > - SFF-8087 to 4x SFF-8482 + 4x SATA power breakout cable
