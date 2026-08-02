@@ -35,8 +35,6 @@ _The purpose of this section is to satisfy and elaborate on the requirements men
 
 <ins>Physical Infrastructure Diagram</ins>
 
-![Storage Architecture Diagram](storageArchitecture.png)
-
 ## 3.3 - Storage Design
 
 NVMe SSD (in the ThinkCentre)
@@ -53,7 +51,9 @@ External DAS
 - Backups
 - Logs
 
-Storage architecture diagram
+<ins>Storage Infrastructure Diagram</ins>
+
+![Storage Architecture Diagram](storageArchitecture.png)
 
 ## 3.4 - Network Design
 
