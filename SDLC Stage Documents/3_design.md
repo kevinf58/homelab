@@ -70,7 +70,7 @@ Some of these metrics may include:
 
 - CPU utilization and temperature
 - RAM utilization
-- Readable SMART data (likely abstracted)
+- Readable SMART data (likely abstracted from the main screen)
 - Network utilization
 - HDD and VM state
 - Storage capacities and temperatures (for both ThinkCentre and DAS)
