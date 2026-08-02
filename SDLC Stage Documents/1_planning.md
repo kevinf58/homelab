@@ -64,8 +64,7 @@ The initial priority is to establish the infrastructure required for the persona
 > - AC-to-DC PSU with minimum 5 SATA ports
 > - PWM controller
 > - 4 SAS HDD's
-
-Despite this change in resources, the initial objectives for this project remain unchanged.
+>   Despite this change in resources, the initial objectives for this project remain unchanged.
 
 ### Financial Resources
 
