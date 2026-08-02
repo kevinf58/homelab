@@ -33,7 +33,9 @@ _The purpose of this section is to satisfy and elaborate on the requirements men
 - PWM controller: HDD fan remote
 - 4 SAS HDD's: Cloud, RAID, and backup storage
 
-Physical infrastructure diagram
+<ins>Physical Infrastructure Diagram</ins>
+
+![Storage Architecture Diagram](storageArchitecture.png)
 
 ## 3.3 - Storage Design
 
