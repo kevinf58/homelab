@@ -14,7 +14,7 @@ So far in my journals, I've talked alot about the hardware side of things and no
 
 ## The Software Side of Things
 
-Theres alot to talk about and I still have lots of thinking to do, so I'll only discuss my overall system architecture for now.
+Theres alot to talk about and I still have lots of thinking to do, so I'll only discuss my overall system architecture for now as its theo only part that I've fully done my research on and fully thought out.
 
 ### Overall Architecture
 
@@ -28,5 +28,5 @@ For now, I'm thinking I separate my services into the following VM's:
 - Storage: Not to be mistaken by cloud storage. This VM manages where and how data is stored. This VM would be responsible for actions like monitoring drive health, temperatures, SMART data, capacity and activity, and providing storage to my cloud storage VM, etc.
 - Cloud Storage: Using NextCloud as the cloud storage host and Tailscale to securely connect to my cloud storage remotely via phone. Storage is allocated by the storage VM for this VM to use.
 - Monitoring: Uses all the metrics and analytics provided by the storage VM to display on a readable dashboard. I'll likely use Grafana for the dashboard as I've used it before. This VM also handles alerts, which I'm thinking will be separated categories based on severity like "critical", "warning", "informational" etc. Theres a massive amount of information to display which is why alot of information will be abstracted. This can be done by separating dashboard sections into categories like infrastructure, storage, security, portfolio website, etc. and being able to get a more detailed overview of each category once expanded.
-- Portfolio: This is an untrusted entry point and should be separated in its own separate VLAN from my other services using a firewall. Within this VM, I'll also have a reverse proxy and monitoring agent which sends the metrics to the monitoring VM.
+- Portfolio: This is an untrusted entry point and should be separated in its own separate VLAN from my other services using a firewall and managed switch. Within this VM, I'll also have a reverse proxy and monitoring agent which sends the metrics to the monitoring VM.
 - Logging: Not much to say here. This VM will just display any notable actions from VM's or users.
