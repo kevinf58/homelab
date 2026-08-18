@@ -44,6 +44,23 @@ I also recently read an article on ZFS (https://jrs-s.net/2015/02/03/will-zfs-an
 
 Because I chose ZFS, the options I have for redundancy are Mirroring, and RAID Z1/Z2/Z3.
 
-Mirroring matters only when IOPS speed matter over capacity and RAIDZ3 would require 3 of 5 drives I would be using for parity storage. Both of these options would not be reasonable for my use case, which leaves me with RAID Z1/Z2. Storing critical data alone should convince me to go with RAIDZ2, but I'm also unwilling to sacrifice 50% of my drive storage for parity so I'm split between the 2 options. Let's go into more detail about my specific situation.
+Mirroring matters only when IOPS speed matter over capacity and RAIDZ3 would require 3 of 5 drives I would be using for parity storage. Both of these options would not be reasonable for my use case, which leaves me with RAID Z1/Z2. Storing critical data alone should convince me to go with RAIDZ2, but I'm also unwilling to sacrifice 50% of my drive storage for parity so I'm split between the 2 options.
 
-Currently, I have 4 4TB SAS HGST HUS724040ALS640 HDDs that I plan to use for data storage on my machine. These drives are rated for a 1 in 10<sup>15</sup> non-recoverable error rate (URE) with an annualized failure rate (AFR) of 0.44%, equating to a Mean Time Between Failures (MTBF) of 2,000,000 hours.
+To understand RAID failure better, there are a few concepts to consider:
+
+- None-Recoverable Read Error (URE): The rate at which a drive fails to read a block of data during normal operation
+- Annualized Failure Rate (AFR): The estimated percentage a model of drive will fail after a year of continuous use
+- Poisson Distribution: A concept used to describe how many times an independent event is likely to occur over a set period of time. Say hypothetically, if I did a large number of rebuilds, the average number of UREs would describe the total number of errors I’d expect across all those rebuilds. However, the number of UREs in any individual rebuild can vary. The Poisson distribution shows how those errors are likely to be spread across individual rebuilds, rather than just looking at the total number of errors overall.
+
+Currently, I have 4 4TB SAS HGST HUS724040ALS640 HDDs that I plan to use for data storage on my machine. These drives are rated for a 1 in 10<sup>15</sup> URE, meaning that one read failure is expected for about every 125TB of data read. The drives are rated at an AFR of 0.44.
+
+Now let's talk about worst case scenarios:
+
+- RAIDZ1 with 12TB of data. A drive fails and the array needs to be rebuilt. This scenario has about a 9.2% chance of a URE and catastrophic array failure (12 / 125 = 9.6% apply a Poisson distribution and you get about 9.2%).
+
+  > [!NOTE]
+  > I were to get standard consumer drives, most of them are rated 1 in 10<sup>14</sup> URE, translating to 1 URE every 12.5TB. If my pool is full with 12TB that equates to about a 62% chance of hitting a URE after a Poisson distribution.
+
+- RAIDZ2 with 8TB of data. As more than 2 drives failing during the rebuild process is extremely low with an AFR of 0.44, we say that worst case it takes 24 hours to fully rebuild. This number is some 1 in 28,000.
+
+In my eyes, the cost to risk gap is massive between RAIDZ1 and RAIDZ2. I'm sacrificing 4TB of usable storage for the worst case scenario for a worst case scenario (UREs during a rebuild process after a drive failure).
