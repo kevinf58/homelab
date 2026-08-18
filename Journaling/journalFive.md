@@ -58,8 +58,7 @@ Now let's talk about worst case scenarios:
 
 - RAIDZ1 with 12TB of data. A drive fails and the array needs to be rebuilt. This scenario has about a 9.2% chance of a URE and catastrophic array failure (12 / 125 = 9.6% apply a Poisson distribution and you get about 9.2%).
 
-  > [!NOTE]
-  > I were to get standard consumer drives, most of them are rated 1 in 10<sup>14</sup> URE, translating to 1 URE every 12.5TB. If my pool is full with 12TB that equates to about a 62% chance of hitting a URE after a Poisson distribution.
+  > _I were to get standard consumer drives, most of them are rated 1 in 10<sup>14</sup> URE, translating to 1 URE every 12.5TB. If my pool is full with 12TB that equates to about a 62% chance of hitting a URE after a Poisson distribution._
 
 - RAIDZ2 with 8TB of data. As more than 2 drives failing during the rebuild process is extremely low with an AFR of 0.44, we say that worst case it takes 24 hours to fully rebuild. This number is some 1 in 28,000.
 
