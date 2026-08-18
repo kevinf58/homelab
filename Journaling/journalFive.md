@@ -68,12 +68,12 @@ In my eyes, the cost to risk gap is significant between the 3 options. A 9.2% ch
 
 ## ZFS Datasets
 
-Datasets in ZFS are treated as their own individual file systems. My ZFS pool will store data from various categories, so creating datasets for each is a given. Record sizes are also an optional parameter I can add when creating these datasets and can optimize throughput.
+Datasets in ZFS are treated as their own individual file systems. My ZFS pool will store data from various categories, so creating datasets for each is a given. Record sizes are also an optional parameter I can add when creating these datasets and can optimize throughput. As for compression methods, zstd for logs as they are small, frequent writes and default to lz4 for everything else.
 
-| Dataset             | Record Size |
-| ------------------- | ----------- |
-| logs                | 16k         |
-| backups             | 128k        |
-| nextcloud           | 1M          |
-| nextcloud/media     | 1M          |
-| nextcloud/documents | 128k        |
+| Dataset             | Record Size | Compression Method |
+| ------------------- | ----------- | ------------------ |
+| logs                | 16k         | zstd               |
+| backups             | 128k        | lz4                |
+| nextcloud           | 1M          | lz4                |
+| nextcloud/media     | 1M          | lz4                |
+| nextcloud/documents | 128k        | lz4                |
