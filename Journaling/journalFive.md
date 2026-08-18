@@ -24,7 +24,7 @@ As I may have mentioned in a previous journal, I've chosen to go with ZFS and pu
 
 ### Hardware RAID
 
-Uses a dedicated controller card to manage disk arrays independent from the host machine. Offers independent booting and saves on compute resources of the host machine, but falls short with vendor lock-in and single point of failure, and no filesystem-level integrity.
+Uses a dedicated controller card to manage disk arrays independent from the host machine. Offers independent booting and saves on compute resources of the host machine, but falls short with vendor lock-in and single point of failure, slow speeds, and no filesystem-level integrity. This sucks - especially if I'm on a budget and can only purchase budget RAID cards.
 
 ### btrfs
 
@@ -32,19 +32,19 @@ Uses copy-on-write, which involves writing changes of data to a new location on 
 
 ### mdadm
 
-The Linux kernel's built-in RAID implementation. Preinstalled everywhere, low system overhead, flexible management, but no bit-rot reduction, no checksumming, and slow rebuild of arrays.
+The Linux kernel's built-in RAID implementation. Preinstalled everywhere, low system overhead, flexible management, but no bit-rot reduction, no checksumming, and slow rebuild of arrays. I want data integrity so checksumming is a requirement, making this an invalid option for me.
 
 ### ZFS
 
-A vombined file system and volume manager. Scalable, checksums, instant snapshots, built-in volumene management with RAIDZ, self-healing pools, and overall maximum data integrity. However, much higher system overhead, ECC RAM strongly recommended, inflexible pool expansion (shrinking pools or removing drives once build is hard), and performance degradation nearing max capacity. Often regarded as the gold standard.
+A combined file system and volume manager. Scalable, checksums, instant snapshots, built-in volume management with RAIDZ, self-healing pools, and overall maximum data integrity. However, much higher system overhead, ECC RAM strongly recommended, inflexible pool expansion (shrinking pools or removing drives once build is hard), and performance degradation nearing max capacity. Often regarded as the gold standard.
 
-I also recently read an article on ZFS (https://jrs-s.net/2015/02/03/will-zfs-and-non-ecc-ram-kill-your-data/) which best explains the "Scrub of Death" idea and why ZFS doesn't become uniqely dangerous if I pair it with non-ECC RAM. As for the RAM constraint, the minimum recommended RAM is 1GB per 1TB of storage for ZFS's memory cache ARC and a feature called deduplication. Deduplication saves storage space by looking for identical data blocks and deleting them. As for ARC, I'll explicitly set a cap for the amount of RAM that it can consume, which would lean a read performance hit rate drop, but it's a metric that I'm willing to tweak if RAM becomes a real constraint.
+I also recently read an article on ZFS (https://jrs-s.net/2015/02/03/will-zfs-and-non-ecc-ram-kill-your-data/) which best explains the "Scrub of Death" idea and why ZFS doesn't become uniquely dangerous if I pair it with non-ECC RAM. As for the RAM constraint, the minimum recommended RAM is 1GB per 1TB of storage for ZFS's memory cache ARC and a feature called deduplication. Deduplication saves storage space by looking for identical data blocks and deleting them. As for ARC, I'll explicitly set a cap for the amount of RAM that it can consume, which would mean a read performance hit rate drop, but it's a metric that I'm willing to tweak if RAM becomes a real constraint.
 
 ## Redundancy Options
 
 Because I chose ZFS, the options I have for redundancy are Mirroring, and RAID Z1/Z2/Z3.
 
-Mirroring matters only when IOPS speed matter over capacity and RAIDZ3 would require 3 of 5 drives I would be using for parity storage. Both of these options would not be reasonable for my use case, which leaves me with RAID Z1/Z2. Storing critical data alone should convince me to go with RAIDZ2, but I'm also unwilling to sacrifice 50% of my drive storage for parity so I'm split between the 2 options.
+RAIDZ3 would require 3 of 5 drives I would be using for parity storage which isn't an option as I'm only using 4 and RAID 1 , which leaves me with RAID Z1/Z2/10.
 
 To understand RAID failure better, there are a few concepts to consider:
 
@@ -60,6 +60,8 @@ Now let's talk about worst case scenarios:
 
   > _Note that I were to get standard consumer drives, most of them are rated 1 in 10<sup>14</sup> URE, translating to 1 URE every 12.5TB. If my pool is full with 12TB that equates to about a 62% chance of hitting a URE after a Poisson distribution._
 
-- RAIDZ2 with 8TB of data. As more than 2 drives failing during the rebuild process is extremely low with an AFR of 0.44, we say that worst case it takes 24 hours to fully rebuild. This number is some 1 in 28,000.
+- RAIDZ2 with 8TB of data. As more than 2 drives failing during the rebuild process is extremely low with an AFR of 0.44, we say that worst case it takes 24 hours to fully rebuild. This number is some 1 in 3 million per year. Rebuild speeds for this process would be slow.
 
-In my eyes, the cost to risk gap is massive between RAIDZ1 and RAIDZ2. I'm sacrificing 4TB of usable storage for the worst case scenario for a worst case scenario (UREs during a rebuild process after a drive failure).
+ - RAID10 with 8TB of data. Any 1 drive can be lost, 2 drives can be lost if they are part of different mirrors. Data loss means that 2 drives from the same mirror failed. The rough chances of this happening over a 24 hour rebuild period would be about 1 in 25,800 per year. Rebuild speeds for this process would be fast.
+
+In my eyes, the cost to risk gap is significant between the 3 options. I'd be sacrificing 4TB of usable storage read/write speeds, and IOPS performance for the worst case scenario for a worst case scenario (UREs during a rebuild process after a drive failure). A 9.2% chance of losing all my data after a drive failure is not a gamble that I'd be willing to take, which leaves me with RAIDZ2 and RAID10. IOPS isn't really a metric I care about for my use case, but I do care about read/write speeds and rebuild speeds (longer window for another drive to fail). I still want to maximize data integrity, but both options already have a very low rate of a catastrophic event occurring, so RAID10 seems like the better option overall.
