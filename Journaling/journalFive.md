@@ -56,19 +56,21 @@ Currently, I have 4 4TB SAS HGST HUS724040ALS640 HDDs that I plan to use for dat
 
 Now let's talk about worst case scenarios:
 
-- RAIDZ1 with 12TB of data. A drive fails and the array needs to be rebuilt. This scenario has about a 9.2% chance of a URE and catastrophic array failure (12 / 125 = 9.6% apply a Poisson distribution and you get about 9.2%).
+- RAIDZ1 with 12TB of data. A drive fails and the pool needs to be rebuilt. This scenario has about a 9.2% chance of a URE and catastrophic pool failure (12 / 125 = 9.6% apply a Poisson distribution and you get about 9.2%).
 
   > _Note that I were to get standard consumer drives, most of them are rated 1 in 10<sup>14</sup> URE, translating to 1 URE every 12.5TB. If my pool is full with 12TB that equates to about a 62% chance of hitting a URE after a Poisson distribution._
 
 - RAIDZ2 with 8TB of data. As more than 2 drives failing during the rebuild process is extremely low with an AFR of 0.44, we say that worst case it takes 24 hours to fully rebuild. This number is some 1 in 3 million per year. Rebuild speeds for this process would be slow.
 
- - RAID10 with 8TB of data. Any 1 drive can be lost, 2 drives can be lost if they are part of different mirrors. Data loss means that 2 drives from the same mirror failed. The rough chances of this happening over a 24 hour rebuild period would be about 1 in 25,800 per year. Rebuild speeds for this process would be fast.
+- RAID10 with 8TB of data. Any 1 drive can be lost, 2 drives can be lost if they are part of different mirrors. Data loss means that 2 drives from the same mirror failed. The rough chances of this happening over a 24 hour rebuild period would be about 1 in 25,800 per year. Rebuild speeds for this process would be fast.
 
 In my eyes, the cost to risk gap is significant between the 3 options. A 9.2% chance of losing all my data after a drive failure is not a gamble that I'd be willing to take even if I'd have to set aside 4 more TB of usable storage for parity purposes, which leaves me with RAIDZ2 and RAID10. Both of the remaining options handle the worst case scenario for a worst case scenario (UREs during a rebuild process after a drive failure). The difference is that RAID10 has higher IOPS, faster rebuilds, faster read/write speeds, but less data integrity. IOPS isn't really a metric I care about for my use case, but I do care about read/write speeds and rebuild speeds (longer window for another drive to fail). I still want to maximize data integrity, but both options already have a very low rate of a catastrophic event occurring so RAID10 seems like the better option overall.
 
 ## ZFS Datasets
+
 My ZFS pool will store data from various categories, so creating datasets for each is a given. Listed is what datasets I'm thinking of implementing
- - Logs
- - Backups
- - Documents
- - Media
+
+- Logs
+- Backups
+- Documents
+- Media
