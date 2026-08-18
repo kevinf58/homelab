@@ -68,9 +68,12 @@ In my eyes, the cost to risk gap is significant between the 3 options. A 9.2% ch
 
 ## ZFS Datasets
 
-My ZFS pool will store data from various categories, so creating datasets for each is a given. Listed is what datasets I'm thinking of implementing
+Datasets in ZFS are treated as their own individual file systems. My ZFS pool will store data from various categories, so creating datasets for each is a given. Record sizes are also an optional parameter I can add when creating these datasets and can optimize throughput.
 
-- Logs
-- Backups
-- Documents
-- Media
+| Dataset             | Record Size |
+| ------------------- | ----------- |
+| logs                | 16k         |
+| backups             | 128k        |
+| nextcloud           | 1M          |
+| nextcloud/media     | 1M          |
+| nextcloud/documents | 128k        |
