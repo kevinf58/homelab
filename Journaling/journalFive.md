@@ -66,6 +66,8 @@ Now let's talk about worst case scenarios:
 
 In my eyes, the cost to risk gap is significant between the 3 options. A 9.2% chance of losing all my data after a drive failure is not a gamble that I'd be willing to take even if I'd have to set aside 4 more TB of usable storage for parity purposes, which leaves me with RAIDZ2 and RAID10. Both of the remaining options handle the worst case scenario for a worst case scenario (UREs during a rebuild process after a drive failure). The difference is that RAID10 has higher IOPS, faster rebuilds, faster read/write speeds, but less data integrity. IOPS isn't really a metric I care about for my use case, but I do care about read/write speeds and rebuild speeds (longer window for another drive to fail). I still want to maximize data integrity, but both options already have a very low rate of a catastrophic event occurring so RAID10 seems like the better option overall.
 
+Of course, this is all in the context of multiple nested worst case scenarios, which will most likely not happen. UREs seem to be a worst-case benchmark provided by manufacturers under extreme testing, but I'd rather be safe than lose all my data.
+
 ## ZFS Datasets
 
 Datasets in ZFS are treated as their own individual file systems. My ZFS pool will store data from various categories, so creating datasets for each is a given. Record sizes are also an optional parameter I can add when creating these datasets and can optimize throughput. As for compression methods, zstd for logs as they are small, frequent writes and default to lz4 for everything else.
