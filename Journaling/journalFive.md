@@ -36,7 +36,7 @@ The Linux kernel's built-in RAID implementation. Preinstalled everywhere, low sy
 
 ### ZFS
 
-A combined file system and volume manager. Scalable, checksums, instant snapshots, built-in volume management with RAIDZ, self-healing pools, and overall maximum data integrity. However, much higher system overhead, ECC RAM strongly recommended, inflexible pool expansion (shrinking pools or removing drives once build is hard), and performance degradation nearing max capacity. Often regarded as the gold standard.
+A combined file system and volume manager. Scalable, copy-on-write, checksums, instant snapshots, built-in volume management with RAIDZ, self-healing pools, and overall maximum data integrity. However, much higher system overhead, ECC RAM strongly recommended, inflexible pool expansion (shrinking pools or removing drives once build is hard), and performance degradation nearing max capacity. Often regarded as the gold standard.
 
 I also recently read an article on ZFS (https://jrs-s.net/2015/02/03/will-zfs-and-non-ecc-ram-kill-your-data/) which best explains the "Scrub of Death" idea and why ZFS doesn't become uniquely dangerous if I pair it with non-ECC RAM. As for the RAM constraint, the minimum recommended RAM is 1GB per 1TB of storage for ZFS's memory cache ARC and a feature called deduplication. Deduplication saves storage space by looking for identical data blocks and deleting them. As for ARC, I'll explicitly set a cap for the amount of RAM that it can consume, which would mean a read performance hit rate drop, but it's a metric that I'm willing to tweak if RAM becomes a real constraint.
 
@@ -45,6 +45,12 @@ I also recently read an article on ZFS (https://jrs-s.net/2015/02/03/will-zfs-an
 Because I chose ZFS, the options I have for redundancy are Mirroring, and RAID Z1/Z2/Z3.
 
 RAIDZ3 would require 3 of 5 drives I would be using for parity storage which isn't an option as I'm only using 4 and RAID 1 , which leaves me with RAID Z1/Z2/10.
+
+### The "Write Hole" Phenomenon
+
+This phenomenon occurs when a power failure or system crash happens during a write and exists in all standard RAID types. An event like this occuring may update the data blocks without updating the parity blocks, making the storage stripe corrupted and unable to rebuild properly if a drive were to fail later. This is a big part of why a UPS is so integral in storage systems: it allows the system to shutdown safely. The only redundancy options that aren't prone to this are options that use copy-on-write to write new stripes instead of overwriting old ones.
+
+### UREs
 
 To understand RAID failure better, there are a few concepts to consider:
 
@@ -64,7 +70,7 @@ Now let's talk about worst case scenarios:
 
 - RAID10 with 8TB of data. Any 1 drive can be lost, 2 drives can be lost if they are part of different mirrors. Data loss means that 2 drives from the same mirror failed. The rough chances of this happening over a 24 hour rebuild period would be about 1 in 25,800 per year. Rebuild speeds for this process would be fast.
 
-In my eyes, the cost to risk gap is significant between the 3 options. A 9.2% chance of losing all my data after a drive failure is not a gamble that I'd be willing to take even if I'd have to set aside 4 more TB of usable storage for parity purposes, which leaves me with RAIDZ2 and RAID10. Both of the remaining options handle the worst case scenario for a worst case scenario (UREs during a rebuild process after a drive failure). The difference is that RAID10 has higher IOPS, faster rebuilds, faster read/write speeds, but less data integrity. IOPS isn't really a metric I care about for my use case, but I do care about read/write speeds and rebuild speeds (longer window for another drive to fail). I still want to maximize data integrity, but both options already have a very low rate of a catastrophic event occurring so RAID10 seems like the better option overall.
+In my eyes, the cost to risk gap is significant between the 3 options. A 9.2% chance of losing all my data after a drive failure is not a gamble that I'd be willing to take even if I'd have to set aside 4 more TB of usable storage for parity purposes, which leaves me with RAIDZ2 and RAID10. Both of the remaining options handle the worst case scenario for a worst case scenario (UREs during a rebuild process after a drive failure). The difference is that RAID10 has higher IOPS, faster rebuilds, faster read/write speeds, but is succeptible to the "Write Hole" phenomenon without a UPS. IOPS isn't really a metric I care about for my use case, but I do care about read/write speeds and rebuild speeds (longer window for another drive to fail). I'm leaning more towards RAID10 as I plan on getting a UPS, but I may change my mind in the near future.
 
 Of course, this is all in the context of multiple nested worst case scenarios, which will most likely not happen. UREs seem to be a worst-case benchmark provided by manufacturers under extreme testing, but I'd rather be safe than lose all my data.
 
