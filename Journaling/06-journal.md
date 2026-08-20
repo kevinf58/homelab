@@ -7,6 +7,9 @@ So it hasn't been too long but a lot has happened!
 
 Once the health checks complete and I verify that none of the drives are degraded and are safe for use, I'm going to start doing more brainstorming and research on how I want my homelab to be set up and the tools that I will use. I'll also set up my ZFS pool directly on Proxmox. I could run it in a VM with TrueNAS or Unraid which would make management easier, but I'd be sacrificing RAM and it'd be a single point of failure. Running it directly on the hypervisor seems to be better practice anyways.
 
+![homelab preview](image-5.png)
+_Yes this setup is really messy at the moment but it'll all come together in time_
+
 ## Next Steps
 
 Next, I'm going to set up scheduled monthly scrubs. For now, these scrubs won't do anything as I haven't moved any data onto my drives yet. I'll also schedule long and short SMART tests sometime later on to get more data on the health of my drives. 
