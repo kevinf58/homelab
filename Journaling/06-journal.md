@@ -22,4 +22,4 @@ Install Tailscale on the Proxmox host. My dashboard and cloud storage VMs will a
 
 Setup my Proxmox host firewall so that it's only accesible via my desktop pc and Tailscale.
 
-At the time of writing this I realized that a switch isn't really that necessary as it doesn't provide me any benefit that Tailscale and Proxmox don't already provide. I only have one machine after all. 
+At the time of writing this I realized that a switch isn't really that necessary as it doesn't provide me any benefit that Tailscale and Proxmox don't already provide. I only have one machine after all. I still have a lot of reading to do on Tailscale and Proxmox, so everything is subject to change!
