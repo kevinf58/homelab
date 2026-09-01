@@ -3,3 +3,4 @@ It's been almost 2 weeks since my last journal. I've been a bit busy lately, so 
 
 To start off, I've decided to refund my switch. I only have one machine, so I was planning on using trunking to forward data to different VLANs for security and isolation. However, my home lab is still really small. I can always reconsider the switch purchase in the future when I scale this project.
 
+Avoid installing Tailscale directly on the Proxmox host and install it on the VMs and LXCs that need to connect to my Tailnet instead. A lot of my services are going to rely on Tailscale for Auth, so if my Tailet gets compromised, associated LXCs and containers are in danger as well. With the right firewall and access control setup, I'm confident I'll be able to minimize the impact of an intruder gaining access to my Tailnet. Honestly, I don't know what I was thinking when I said that I'd install it directly on the host in the last journal.
