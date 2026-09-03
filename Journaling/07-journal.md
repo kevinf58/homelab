@@ -16,4 +16,6 @@ Currently, I plan on using Caddy and a Cloudflare tunnel to host my website. I'l
 
 ## Dashboard
 
-As I just mentioned, this will be accessible via a private subdomain. To display my dashboard using a physical monitor at home, I'll set up a browser tab (likely Chromium) running in kiosk mode. As for the tools to use for developing the dashboard itself, Grafana + Prometheus seems to be the gold standard for enterprise dashboards. I've used Grafana in the past, which is also a bonus. Another set of technologies I have in mind is Homepage + Netdata + Uptime Kuma, which seems like the more Homelab-friendly alternative.
+As I just mentioned, this will be accessible via a private subdomain. To display my dashboard using a physical monitor at home, I'll set up a browser tab (likely Chromium) running in kiosk mode. As for the tools to use for developing the dashboard itself:
+1. Grafana + Prometheus + Loki: seems to be the gold standard for enterprise dashboards. I've used Grafana in the past, which is also a bonus.
+2. Homepage + Netdata + Uptime Kuma: The more homelab friendly alternative that is less resource hungry. 
