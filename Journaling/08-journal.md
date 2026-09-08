@@ -34,7 +34,7 @@ Processes that run near the data source that gather metrics and ship them forwar
 Time-series databases (TSDB) are used for metrics storage and inverted-index text stores for logs storage instead of the more familiar relational databases. In my case, I'll most likely be using Prometheus's TSDB and Grafana Loki for logs. Enterprises split data retention into 2 tiers of storage: hot storage (30 days data retention) and cold storage (90+ days).
 
 ### Query Layer
-Where raw data and metrics are transformed into actionable insights.
+Where raw telemetry is used to investigate system behavior, debug incidents, and understand performance.
 
 ### Visualization
 Turning the queried data into a visualization understandable to the user. In my context, this would be in the form of Grafana dashboards.
