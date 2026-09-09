@@ -46,3 +46,14 @@ Rules evaluate metrics continuously to trigger the sending of notifications or a
 Some other dashboard ideas:
  - Overview Dashboard: High level dashboard meant to give the reader a quick rundown of system performance. Includes colours like green/yellow/red to represent uptime, some brief charts/graphs, minimal numbers. Clicking on a section of of the dashboard could reveal more detailed insights on that specific part of the dashboard.
  - Service-specific Dashboards: One dashboard per service. These dashboards go into more depth for each service, but should stay relatively brief while still providing the reader with insights on overall performance and health.
+
+To end it off, these are some of the metrics and data that I'd like to keep track of:
+ - CPU utilization
+ - Memory usage
+ - Disk I/O (throughput, IOPS, queue depth/latency)
+ - Disk space
+ - Network throughput, packet loss, errors
+ - Any temperature/thermal data where available
+ - ZFS pool health, scrub status, SMART data
+ - VM and LXC uptime status
+ - Any other data that falls under latency, traffic, errors, and saturation
