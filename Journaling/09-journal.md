@@ -11,6 +11,7 @@ To start off, all my services will be hosted on a single machine running PVE (Pr
 My method of authorization will be via Tailscale, a zero-trust friendly VPN that will enable me to access my services over public internet using all my devices connected to my Tailnet (What Tailscale calls their private, encrypted networks). 
 
 ## Dashboard
+
 The following table lists the metrics I will track, the tools I'll use to track them, and their reason I will track them for:
 
 | Metric | Tool Used | Explanation |
@@ -21,4 +22,4 @@ The following table lists the metrics I will track, the tools I'll use to track 
 | Real-time RAM/CPU consumption | node_exporter |  |
 | HDD storage consumption | node_exporter |  |
 | Local NVMe storage consumption | node_exporter |  |
-|  |  |  |
+| Logs | Grafana Alloy |  |
