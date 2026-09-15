@@ -15,10 +15,10 @@ The following table lists the metrics I will track, the tools I'll use to track 
 
 | Metric | Tool Used | Explanation |
 | -------- | -------- | -------- |
-| CPU, local NVMe, external HDD temperatures |  |  |
-| Last smartctl scan results |  |  |
-| Last zfs scan results |  |  |
-| Real-time RAM/CPU consumption |  |  |
-| HDD storage consumption |  |  |
-| Local NVMe storage consumption |  |  |
+| CPU, local NVMe, external HDD temperatures | node_exporter |  |
+| Last smartctl scan results | smartctl_exporter |  |
+| Last zfs scan results | zfs_exporter |  |
+| Real-time RAM/CPU consumption | node_exporter |  |
+| HDD storage consumption | node_exporter |  |
+| Local NVMe storage consumption | node_exporter |  |
 |  |  |  |
