@@ -17,8 +17,9 @@ The following table lists the metrics I will track, the tools I'll use to track 
 | Metric | Tool Used | Explanation |
 | -------- | -------- | -------- |
 | CPU, local NVMe, external HDD temperatures | Grafana Alloy |  |
-| Last smartctl scan results | smartctl_exporter |  |
-| Last zfs scan results | zfs_exporter |  |
+| smartctl data | smartctl_exporter |  |
+| ZFS data | zfs_exporter |  |
+| smartctl and ZFS scan/scrub history | Custom Prometheus textfile collector |  |
 | Real-time RAM/CPU consumption | Grafana Alloy |  |
 | HDD storage consumption | Grafana Alloy |  |
 | Local NVMe storage consumption | Grafana Alloy |  |
