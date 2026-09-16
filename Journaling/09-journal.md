@@ -35,11 +35,11 @@ The following table lists the metrics I will track and the tools I'll use to tra
 As for collectors, I have 
 | Collectors |
 | -------- |
+| Grafana Alloy |
+| pve-exporter |
 | smartctl_exporter |
 | zfs_exporter|
 | Custom Prometheus textfile collectors |
-| HDD I/O | Grafana Alloy |
-| pve-exporter |
 | NUT-exporter |
 
 
