@@ -44,3 +44,5 @@ As for collectors, I have
 
 
 Besides the collectors, I'll use Prometheus as a centralized metrics collection storage for the collectors, Loki as the centralized Logs collection storage, and Grafana for data querying and building the panels that will make up my dashboard. I'll then most likely route my Tailscale MagicDNS domain to Grafana's port securely so that I can view my dashboard via the domain on all machines connected to my Tailnet.
+
+Lastly, a rough draft of the panels I'll have on my final dashboard will not be in this journal but on the design phase document of my SDLC.
