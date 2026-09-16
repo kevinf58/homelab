@@ -17,19 +17,30 @@ I'll be using Grafana Alloy for both metrics and logs collection instead of node
 
 The following table lists the metrics I will track and the tools I'll use to track them.
 
-| Metric | Collectors | Explanation |
-| -------- | -------- | -------- |
-| CPU, local NVMe, external HDD temperatures | Grafana Alloy |
-| smartctl data | smartctl_exporter |
-| ZFS pool stats | zfs_exporter |
-| smartctl and ZFS scan/scrub history | Custom Prometheus textfile collector |
-| Real-time RAM/CPU consumption | Grafana Alloy |
-| HDD storage consumption | Grafana Alloy |
-| Local NVMe storage consumption | Grafana Alloy |
-| Logs | Grafana Alloy |
+| Metrics |
+| -------- |
+| CPU, local NVMe, external HDD temperatures |
+| smartctl data |
+| ZFS pool stats |
+| smartctl and ZFS scan/scrub history |
+| Real-time RAM/CPU consumption |
+| HDD storage consumption |
+| Local NVMe storage consumption |
+| Logs |
+| HDD I/O |
+| VM/LXC uptime status |
+| Last backup status and date |
+| UPS/power |
+
+As for collectors, I have 
+| Collectors |
+| -------- |
+| smartctl_exporter |
+| zfs_exporter|
+| Custom Prometheus textfile collectors |
 | HDD I/O | Grafana Alloy |
-| VM/LXC uptime status | ? |
-| Last backup status and date | pve-exporter |
-| UPS/power | NUT-exporter |
+| pve-exporter |
+| NUT-exporter |
+
 
 Besides the collectors, I'll use Prometheus as a centralized metrics collection storage for the collectors, Loki as the centralized Logs collection storage, and Grafana for data querying and building the panels that will make up my dashboard. I'll then most likely route my Tailscale MagicDNS domain to Grafana's port securely so that I can view my dashboard via the domain on all machines connected to my Tailnet.
