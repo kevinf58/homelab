@@ -8,19 +8,28 @@ I'll end off this article by outlining my Proxmox firewall configuration.
 ## Broad-level Architecture
 To start off, all my services will be hosted on a single machine running PVE (Proxmox Virtual Environment) as its OS, with all my services running in separate VMs and LXCs for isolation and scalability. Attached to this machine will be a JBOD (just a bunch of disks) with 4 drives. Both will be powered using a UPS with an automatic graceful shutdown plan configured for disaster prevention. Within Proxmox, I'll have a ZFS pool configured in RAID Z2, meaning that 2 of my 4x4TB drives are set aside for parity to prevent data loss and encourage redundancy. This will leave a bit under 8TB of usable storage space for my services.
 
-My method of authorization will be via Tailscale, a zero-trust friendly VPN that will enable me to access my services over public internet using all my devices connected to my Tailnet (What Tailscale calls their private, encrypted networks). 
+My method of authorization will be via Tailscale, a zero-trust friendly VPN that will enable me to access my services over public internet using all my devices connected to my Tailnet (What Tailscale calls their private encrypted networks). 
 
 ## Dashboard
+This service will be hosted in an LXC.
 
-The following table lists the metrics I will track, the tools I'll use to track them, and their reason I will track them for:
+I'll be using Grafana Alloy for both metrics and logs collection instead of node_exporter and the deprecated Promtail.
 
-| Metric | Tool Used | Explanation |
+The following table lists the metrics I will track and the tools I'll use to track them.
+
+| Metric | Collectors | Explanation |
 | -------- | -------- | -------- |
-| CPU, local NVMe, external HDD temperatures | Grafana Alloy |  |
-| smartctl data | smartctl_exporter |  |
-| ZFS data | zfs_exporter |  |
-| smartctl and ZFS scan/scrub history | Custom Prometheus textfile collector |  |
-| Real-time RAM/CPU consumption | Grafana Alloy |  |
-| HDD storage consumption | Grafana Alloy |  |
-| Local NVMe storage consumption | Grafana Alloy |  |
-| Logs | Grafana Alloy |  |
+| CPU, local NVMe, external HDD temperatures | Grafana Alloy |
+| smartctl data | smartctl_exporter |
+| ZFS pool stats | zfs_exporter |
+| smartctl and ZFS scan/scrub history | Custom Prometheus textfile collector |
+| Real-time RAM/CPU consumption | Grafana Alloy |
+| HDD storage consumption | Grafana Alloy |
+| Local NVMe storage consumption | Grafana Alloy |
+| Logs | Grafana Alloy |
+| HDD I/O | Grafana Alloy |
+| VM/LXC uptime status | ? |
+| Last backup status and date | pve-exporter |
+| UPS/power | NUT-exporter |
+
+Besides the collectors, I'll use Prometheus as a centralized metrics collection storage for the collectors, Loki as the centralized Logs collection storage, and Grafana for data querying and building the panels that will make up my dashboard. I'll then most likely route my Tailscale MagicDNS domain to Grafana's port securely so that I can view my dashboard via the domain on all machines connected to my Tailnet.
