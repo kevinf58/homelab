@@ -52,3 +52,6 @@ This will be run in an LXC. In short, I'll have nginx running on a local port, c
 
 ## Nextcloud
 Again, not really much to say here. I'll partition a part of my pool for Nextcloud storage and run it in a Debian VM in a Docker container and run Tailscale so that I can access the VM remotely.
+
+## Firewall Configuration
+All LXC's and VM's on my Proxmox host should be able to access the Proxmox Web UI (Port 8006) and SSH (Port 22) via my Tailnet.
