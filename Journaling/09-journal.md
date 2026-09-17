@@ -11,7 +11,7 @@ To start off, all my services will be hosted on a single machine running PVE (Pr
 My method of authorization will be via Tailscale, a zero-trust friendly VPN that will enable me to access my services over public internet using all my devices connected to my Tailnet (What Tailscale calls their private encrypted networks). 
 
 ## Dashboard
-This service will be hosted in an LXC.
+This service will be hosted in an LXC with Tailscale running for remote access.
 
 I'll be using Grafana Alloy for both metrics and logs collection instead of node_exporter and the deprecated Promtail.
 
@@ -46,3 +46,9 @@ As for collectors, I have
 Besides the collectors, I'll use Prometheus as a centralized metrics collection storage for the collectors, Loki as the centralized Logs collection storage, and Grafana for data querying and building the panels that will make up my dashboard. I'll then most likely route my Tailscale MagicDNS domain to Grafana's port securely so that I can view my dashboard via the domain on all machines connected to my Tailnet.
 
 Lastly, a rough draft of the panels I'll have on my final dashboard will not be in this journal but on the design phase document of my SDLC.
+
+## Portfolio Website
+This will be run in an LXC. In short, I'll have nginx running on a local port, create a tunnel with the local port and then route the traffic to that local host. Tailscale will be run on this LXC so that I can access it remotely.
+
+## Nextcloud
+Again, not really much to say here. I'll partition a part of my pool for Nextcloud storage and run it in a Debian VM in a Docker container and run Tailscale so that I can access the VM remotely.
