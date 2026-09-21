@@ -55,17 +55,13 @@ External DAS
 
 ![Storage Architecture Diagram](storageArchitecture.png)
 
-## 3.4 - Network Design
+## 3.4 - VM Designs
 
-Network topology diagram
+## 3.5 - Security Design
 
-## 3.5 - VM Designs
+## 3.6 - Backup and Recovery Design
 
-## 3.6 - Security Design
-
-## 3.7 - Backup and Recovery Design
-
-## 3.8 - Analytics and Monitoring Design
+## 3.7 - Analytics and Monitoring Design
 
 Hardware metrics should be constantly monitored for abnormalities and disaster prevention. Some of these metrics may be monitored in the form of a graph to improve readability.
 Some of these metrics may include:
@@ -81,7 +77,7 @@ Some of these metrics may include:
 
 If any abnormalities are found, notifications will be sent through email and/or app
 
-## 3.9 - Scalability
+## 3.8 - Scalability
 
 This system is designed to be scalable if more compute resources or functionalities are needed
 
