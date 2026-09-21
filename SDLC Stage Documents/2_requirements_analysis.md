@@ -7,8 +7,8 @@ _This section entails all functional and non-functional requirements for the sys
 - User is able to upload and download data remotely from the home cloud via phone
 - Portfolio website is hosted and can be accessed remotely via the domain purchased
 - Centralized user auth through an Active Directory server
-- Each core service must be hosted in a VM, and the VMs must be able to start, stop, and be restored and backed up independently
-- Physical display of live hardware health and metrics with notifications for abnormal conditions or potential hardware failure.
+- Each core service must be hosted in a VM/LXC, and they must be able to start, stop, and be restored and backed up independently
+- Physical and remote display of live hardware health and metrics with notifications for abnormal conditions or potential hardware failure.
 
 ## 2.2 - Non-functional Requirements
 
