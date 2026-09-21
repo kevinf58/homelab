@@ -44,18 +44,17 @@ NVMe SSD (in the ThinkCentre)
 - ISO images
 - Containers
 
-External DAS
+JBOD
 
 - Cloud storage
 - RAID pool
-- Backups
 - Logs
 
 <ins>Storage Infrastructure Diagram</ins>
 
 ![Storage Architecture Diagram](storageArchitecture.png)
 
-## 3.4 - VM Designs
+## 3.4 - VM/LXC Designs
 
 ## 3.5 - Security Design
 
