@@ -4,6 +4,8 @@ _The purpose of this section is to satisfy and elaborate on the requirements men
 
 ## 3.1 - General Architecture
 
+The system consists of a single-node virtualization platform (Proxmox VE) hosting a set of isolated VMs and LXC containers, each responsible for one function. In the absence of a VLAN-capable switch, network segmentation is achieved logically through the Proxmox firewall (datacenter, node, and guest levels), strict per-guest IP/port allow-listing, and a Tailscale-based zero-trust overlay network for remote access. Public-facing traffic reaches the platform exclusively through an outbound-only Cloudflare Tunnel, so no inbound ports are ever opened on the home router.
+
 ### 3.1.1 - C4 Diagram
 
 <ins>Context diagram</ins>
@@ -37,6 +39,8 @@ _The purpose of this section is to satisfy and elaborate on the requirements men
 
 ## 3.3 - Storage Design
 
+Storage is split between the internal NVMe boot disk and an external JBOD of four SAS drives, attached via the HBA in IT mode (pass-through, no hardware RAID).
+
 NVMe SSD (in the ThinkCentre)
 
 - Proxmox
@@ -46,9 +50,18 @@ NVMe SSD (in the ThinkCentre)
 
 JBOD
 
-- Cloud storage
-- RAID pool
-- Logs
+The four drives are pooled into a single ZFS pool named tank, configured as RAID Z2 (dual-parity), tolerating up to two simultaneous drive failures without data loss. Pool created with ashift=12, lz4 compression, atime disabled, and POSIX ACLs enabled.
+
+ZFS ARC is capped (rather than left at the ~50% default) to avoid starving guest memory on a 32GB host. Monthly scrubs and staggered SMART short/long self-tests are scheduled via cron and an overview of results are displayed on the dashboard.
+
+| Dataset | Purpose |
+| -------- | -------- |
+| tank/vm-storage | VM virtual disks |
+| tank/lxc-storage | LXC mounted volumes |
+| tank/nextcloud-data | Nextcloud bulk storage |
+| tank/minecraft | Minecraft world and server data |
+| tank/backups | Proxmox backup targets |
+| tank/logs | Monitoring LXC disk (Prometheus/Loki data) |
 
 <ins>Storage Infrastructure Diagram</ins>
 
@@ -56,25 +69,23 @@ JBOD
 
 ## 3.4 - VM/LXC Designs
 
+Each service runs in its own dedicated guest to keep functions isolated and independent. Static IP addressing is used throughout, incrementing by 10 per guest on the 10.0.0.0/24 LAN.
+
 ## 3.5 - Security Design
 
 ## 3.6 - Backup and Recovery Design
 
 ## 3.7 - Analytics and Monitoring Design
 
-Hardware metrics should be constantly monitored for abnormalities and disaster prevention. Some of these metrics may be monitored in the form of a graph to improve readability.
-Some of these metrics may include:
+Hardware and service metrics are monitored continuously to catch abnormalities before they cause data loss or downtime. The stack is built on Prometheus (metrics), Loki (logs), Grafana Alloy (collection/shipping agent on every guest and the host), and Grafana (visualization/alerting).
 
-- CPU utilization and temperature
-- RAM utilization
-- Readable SMART data (likely abstracted from the main screen)
-- Network utilization
-- HDD and VM state
-- Storage capacities and temperatures (for both ThinkCentre and DAS)
-- UPS battery state
-  Display these metrics on the dashboard's default screen.
-
-If any abnormalities are found, notifications will be sent through email and/or app
+ - CPU utilization and temperature - collected via Alloy's exporter and hwmon sensors on the host.
+ - RAM utilization - collected per guest via Alloy's exporter.
+ - Readable SMART data - collected via smartctl_exporter on the host; raw attributes are abstracted into simplified pass/fail and last-self-test panels rather than shown as raw output on the main screen.
+ - Network utilization - throughput, errors, and drops via Alloy's exporter.
+ - HDD and VM/LXC state - ZFS pool health via zfs_exporter; guest up/down and uptime via pve_exporter against the Proxmox API.
+ - Storage capacities and temperatures (ThinkCentre and DAS) - ZFS pool capacity via zfs_exporter, NVMe/CPU temps via hwmon, and SAS drive temps via SMART, since spinning SAS drives are not exposed through hwmon.
+ - UPS battery state - to be integrated via NUT (Network UPS Tools) exporter.
 
 ## 3.8 - Scalability
 
