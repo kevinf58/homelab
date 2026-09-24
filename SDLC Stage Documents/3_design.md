@@ -93,21 +93,21 @@ In the absence of VLAN-capable switching, security is layered entirely through s
 ## 3.6 - Backup and Recovery Design
 Backups are structured in two layers - ZFS snapshots for fast, low-overhead point-in-time recovery, and Proxmox's native backup (vzdump) for full VM/LXC image-level recovery - targeting the dedicated tank/backups dataset on the RAIDZ2 pool.
 
-<ins> ZFS snapshots </ins>
+<ins>ZFS snapshots:</ins>
 Scheduled snapshots on tank/nextcloud-data and tank/minecraft provide fast rollback for accidental deletion or corruption without needing a full VM/LXC restore. Snapshots are retained on a rotating schedule.
 
-<ins> Proxmox backup jobs (vzdump) </ins>
+<ins>Proxmox backup jobs (vzdump):</ins> 
 Scheduled backup jobs cover every VM and LXC, writing to tank/backups, providing full-image recovery in the event of guest-level failure (corrupted OS disk, failed upgrades) rather than just data loss.
 Retention is capped to 3 backups per guest.
 
-<ins> Monitoring integration </ins>
+<ins>Monitoring integration:</ins>
 Backup job success/failure and duration are displayed in Grafana (Section 3.7) so a failed backup is caught proactively rather than discovered only at restore time.
 
 
-<ins> Recovery validation </ins>
+<ins>Recovery validation:</ins>
 Periodic test restores (of at least one VM/LXC and one ZFS snapshot) are performed to confirm backups are actually restorable, rather than assuming success from job logs alone.
 
-</ins> Off-site consideration </ins>
+<ins>Off-site consideration:</ins>
 All backups above reside on the same physical pool (tank) as the production data. RAIDZ2 protects against drive failure but not against a pool-level loss (multiple simultaneous failures beyond parity, theft, fire). An off-site or off-host copy of tank/backups is a known gap and a candidate for future scaling rather than part of the current implementation.
 
 ## 3.7 - Analytics and Monitoring Design
